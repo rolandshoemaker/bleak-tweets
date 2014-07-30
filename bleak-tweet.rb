@@ -64,12 +64,10 @@ def imageSearch(tag, tweet, imagemd5)
 				drawable = Magick::Draw.new
 				
 				drawable.pointsize = 18.0
-				#drawable.gravity = Magick::SouthEastGravity
 				drawable.font_weight = Magick::BoldWeight
 
 				tm = drawable.get_type_metrics(img, tweet)
 				drawable.fill = 'black'
-				#drawable.opacity(1)
 				xy1 = [0, (((img.rows)*6)/10)]
 				xy2 = [(((img.columns)*8)/10), (((img.rows)*9)/10)]
 				
@@ -135,10 +133,8 @@ client = Twitter::Client.new(
 )
 
 
-#md5list = Array[*File.read('md5list').split(/|\n/)]
 md5list = IO.readlines("md5list") 
 md5list = md5list.map{|x| x.chomp}
-#imagemd5 = Array[*File.read('imagemd5').split(/|\n/)]
 imagemd5 = IO.readlines("imagemd5")
 imagemd5 = imagemd5.map{|x| x.chomp}
 for y in 0..6
@@ -149,4 +145,3 @@ for y in 0..6
 		sleep(postInterval)
 	end
 end
-#imageSearch("olol", "i liek cheese")
