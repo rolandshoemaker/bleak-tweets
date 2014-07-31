@@ -76,9 +76,6 @@ def imageSearch(tag, tweet, imagemd5)
 				drawable.draw(img)
 	
 				position = xy1[1]+10
-
-				puts wraptext(tweet, ((xy2[0]-xy1[0])-10)/10)
-				
 				drawable.annotate(img,(xy2[0]-xy1[0])-10,(xy2[1]-xy1[1])-10,10,position += 15, wraptext(tweet, ((xy2[0]-xy1[0])-10)/10)) {self.fill='white'}
 				
 				filename = "testy." << img.format
