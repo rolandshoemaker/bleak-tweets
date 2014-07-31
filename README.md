@@ -3,6 +3,8 @@ bleak-tweets
 
 a program to cull bleak tweets and images and combine them, posting them to a tumblr
 
+dependency: the tumblr-rb ruby gem (http://blog.markwunsch.com/post/441371943/tumblr-rb)
+
 This program was designed as kind of a jokey mixed-media art project to capture the banality of twitter use.
 Based on a list of 'emotionally bleak' words it searches twitter using weighted probability for tweets
 using hashtags that contain these words, once it finds a tweet that it has never used before it uses the
