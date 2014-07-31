@@ -23,7 +23,7 @@ end
 
 def findTweet(client, weightedlist)
 	randomtag = rand(weightedlist.length)
-	results = client.search("# " << weightedlist[randomtag] << " -rt", :count => 1).results.first
+	results = client.search("# " << weightedlist[randomtag] << " -rt", :count => 1).first
 	
 	unless (results.nil?)
 		meh = Array.new
@@ -76,9 +76,11 @@ def imageSearch(tag, tweet, imagemd5)
 				drawable.draw(img)
 	
 				position = xy1[1]+10
-				wraptext(tweet, ((xy2[0]-xy1[0])-10)/10).each do |row|
-					drawable.annotate(img,(xy2[0]-xy1[0])-10,(xy2[1]-xy1[1])-10,10,position += 15,row) {self.fill='white'}
-				end
+
+				puts wraptext(tweet, ((xy2[0]-xy1[0])-10)/10)
+				
+				drawable.annotate(img,(xy2[0]-xy1[0])-10,(xy2[1]-xy1[1])-10,10,position += 15, wraptext(tweet, ((xy2[0]-xy1[0])-10)/10)) {self.fill='white'}
+				
 				filename = "testy." << img.format
 				img.write(filename)
 			}
@@ -125,12 +127,12 @@ end
 
 postInterval = (60*60*24)/75	# seconds between posts where 75 is the daily limit
 
-client = Twitter::Client.new(
-	:consumer_key => "",
-	:consumer_secret => "",
-	:oauth_token => "",
-	:oauth_token_secret => ""
-)
+client = Twitter::REST::Client.new do |config|
+	config.consumer_key = ""
+	config.consumer_secret = ""
+	config.access_token = ""
+	config.access_token_secret = ""
+end
 
 
 md5list = IO.readlines("md5list") 
